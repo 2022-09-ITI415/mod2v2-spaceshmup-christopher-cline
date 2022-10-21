@@ -100,6 +100,7 @@ public class Hero : MonoBehaviour {
 
     public void AbsorbPowerUp(GameObject go)
     {
+        Weapon w;
         PowerUp pu = go.GetComponent<PowerUp>();
         switch (pu.type)
         {
@@ -107,10 +108,19 @@ public class Hero : MonoBehaviour {
                 shieldLevel++;
                 break;
 
+            case WeaponType.upgrade:
+                w = GetEmptyWeaponSlot();
+                if (w != null)
+                {
+                    // Set it to pu.type
+                    w.SetType(weapons[0].type);
+                }
+                break;
+
             default:
                 if(pu.type == weapons[0].type)
                 {
-                    Weapon w = GetEmptyWeaponSlot();
+                    w = GetEmptyWeaponSlot();
                     if(w != null)
                     {
                         // Set it to pu.type
